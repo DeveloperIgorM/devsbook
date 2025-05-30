@@ -1,0 +1,40 @@
+==============IDEALIZANDO BANCO DE DADOS==============
+
+-Users -> Usuários
+--id
+--email
+--password
+--name
+--birthdate
+--city
+--work
+--cover
+--token
+
+-UserRelations -> Relação entre usuários (Ex: seguir alguém ou ser seguido)
+--id
+--user_from
+--user_to
+
+
+-Posts -> postagens, fotos 
+--id
+--type(text,photo)
+--created_at
+--body
+--like_count
+
+
+-PostsComments -> Comentários no posts
+--id
+--id_post
+--id_user
+--created_at
+--body
+
+
+-PostsLikes -> curtidas
+--id
+--id_post
+--id_user
+
