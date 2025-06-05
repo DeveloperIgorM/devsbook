@@ -20,7 +20,9 @@ class HomeController extends Controller {
 
     public function index() {
         
-        $this->render('home', ['nome' => 'Igor']);
+        $this->render('home', [
+            'loggedUser' => $this->loggedUser
+        ]);
     }
 
 
