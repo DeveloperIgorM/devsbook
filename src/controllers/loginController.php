@@ -15,7 +15,7 @@ class LoginController extends Controller {
       $_SESSION['flash'] = '';
     }
     //render -> renderiza o html no php
-    $this->render('login', [
+    $this->render('signin', [
       'flash' => $flash
     ]);
   }
@@ -49,6 +49,21 @@ class LoginController extends Controller {
   }
 
   public function signup() {
-    echo 'cadastro';
+    $flash = '';
+    if(!empty($_SESSION['flash'])) {
+      $flash = $_SESSION['flash'];
+      $_SESSION['flash'] = '';
+    }
+    //render -> renderiza o html no php
+    $this->render('signup', [
+      'flash' => $flash
+    ]);
   }
+
+  public function signupAction() {
+
+    
+  }
+
+
 }
