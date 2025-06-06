@@ -7,7 +7,7 @@
       <div class="column pr-5">
 
         <!-- Puxando o box de criação de um novo post-->
-        <?= $render('feed-editor'); ?>
+        <?= $render('feed-editor', ['user' => $loggedUser]); ?>
 
         <!-- Pegando itens para compor o feed -->
         <?= $render('feed-item'); ?>
