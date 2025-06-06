@@ -18,6 +18,7 @@ class Model {
             $connection = Database::getInstance();
             self::$_h = new Builder('mysql', function($query, $queryString, $queryParameters) use($connection) {
                 $statement = $connection->prepare($queryString);
+
                 $statement->execute($queryParameters);
 
                 if ($query instanceof FetchableInterface)
