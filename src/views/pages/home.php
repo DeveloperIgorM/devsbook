@@ -9,8 +9,13 @@
         <!-- Puxando o box de criação de um novo post-->
         <?= $render('feed-editor', ['user' => $loggedUser]); ?>
 
+        <?php foreach($feed as $feedItem): ?>
+          <?= $render('feed-item', [
+            'data' => $feedItem
+          ]); ?>
+        <?php endforeach; ?>
+        
         <!-- Pegando itens para compor o feed -->
-        <?= $render('feed-item'); ?>
 
       </div>
       <div class="column side pl-5">
