@@ -4,6 +4,7 @@ namespace src\handlers;
 
 use \src\models\User;
 use \src\models\UsersRelation;
+use \src\handlers\PostHandler;
 
 // classe especifica para fazer verificações de login 
 
@@ -80,7 +81,7 @@ class UserHandler {
 
         // Lista de pessoas que seguem X usuários
 
-        // Followers -> Seguidores
+        // FOLLOWERS -> Seguidores
         $followers = UsersRelation::select()->where('user_to', $id)->get();  //pegando as relações
         foreach($followers as $follower) {
           $userData = User::select()->where('id', $follower['user_from'])->one();  // user_from -> quem é que seguiu o usuário que estou acessando 
@@ -97,7 +98,7 @@ class UserHandler {
         }
 
 
-        // Following -> Seguindo
+        // FOLLOWING -> Seguindo
          $following = UsersRelation::select()->where('user_from', $id)->get();  // Aqui o User_from sou EU
         foreach($following as $follower) {
           $userData = User::select()->where('id', $follower['user_to'])->one();  // E o User_to é uma outra pessoa que eu sigo
@@ -112,9 +113,8 @@ class UserHandler {
           $user->following[] = $newUser;
         }
 
-
-
-        // photos
+        // PHOTOS
+        $user->photos = PostHandler::getPhotosFrom($id); // Pegando as fotos do usuários (posts)
 
       }
 

@@ -44,12 +44,12 @@ class PostHandler {
       ->page($page, $perPage)
       ->get();  // pegando os posts, em que o id_user está presente na lista $users = pessoas que eu sigo
 
-      //pegando o total de posts para paginação
-       $total = Post::select()
-        ->where('id_user', 'in', $users)
+    //pegando o total de posts para paginação
+    $total = Post::select()
+      ->where('id_user', 'in', $users)
       ->count();
-      $pageCount = ceil($total / $perPage); // jogando a divisão de total por perPage e jogando em total, o 'CEIL' arredonda pra cima
-       
+    $pageCount = ceil($total / $perPage); // jogando a divisão de total por perPage e jogando em total, o 'CEIL' arredonda pra cima
+
 
 
     // 3. transformar os resultados em objetos dos models.
@@ -62,7 +62,7 @@ class PostHandler {
       $newPost->body = $postItem['body'];
       $newPost->mine = false;
 
-      if($postItem['id_user'] == $idUser) { // verificando se o id do post é mesmo valor do id do usuário logado, para uma exclusão de post por exemplo
+      if ($postItem['id_user'] == $idUser) { // verificando se o id do post é mesmo valor do id do usuário logado, para uma exclusão de post por exemplo
         $newPost->mine = true;
       }
 
@@ -93,5 +93,26 @@ class PostHandler {
       'pageCount' => $pageCount,
       'currentPage' => $page
     ];
+  }
+
+  public static function getPhotosFrom($idUser) {
+    $photosData =  Post::select()
+      ->where('id_user', $idUser)
+      ->where('type', 'photo')
+    ->get();
+
+    $photos = [];
+
+    foreach($photosData as $photo) {
+      $newPost = new Post();
+      $newPost->id = $photo['id'];
+      $newPost->type = $photo['photo'];
+      $newPost->created_at = $photo['created_at'];
+      $newPost->body = $photo['body'];
+
+      $photos[] = $newPost;
+    }
+
+    return $photos;
   }
 }
