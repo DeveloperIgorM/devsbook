@@ -3,6 +3,7 @@
 namespace src\handlers;
 
 use \src\models\User;
+use \src\models\UsersRelation;
 
 // classe especifica para fazer verificações de login 
 
@@ -57,7 +58,8 @@ class UserHandler {
     return $user ? true : false;
   }
 
-  public static function getUser($id) {
+  // Quando o usuário mandar FULL como true, quer dizer que ele quer as informações completas do usuário
+  public static function getUser($id, $full = false) {
     $data = User::select()->where('id', $id)->one();
 
     if ($data) {
@@ -69,6 +71,52 @@ class UserHandler {
       $user->work = $data['work'];
       $user->avatar = $data['avatar'];
       $user->cover = $data['cover'];
+
+      if($full) {
+        $user->followers = [];
+        $user->following = [];
+        $user->photos = [];
+
+
+        // Lista de pessoas que seguem X usuários
+
+        // Followers -> Seguidores
+        $followers = UsersRelation::select()->where('user_to', $id)->get();  //pegando as relações
+        foreach($followers as $follower) {
+          $userData = User::select()->where('id', $follower['user_from'])->one();  // user_from -> quem é que seguiu o usuário que estou acessando 
+
+
+          // preenchendo o objeto de usuário
+          $newUser = new User();
+          $newUser->id = $userData['id'];
+          $newUser->name = $userData['name'];
+          $newUser->avatar = $userData['avatar'];
+
+          // Adicionando o objeto de usuário no array de seguidores
+          $user->followers[] = $newUser;
+        }
+
+
+        // Following -> Seguindo
+         $following = UsersRelation::select()->where('user_from', $id)->get();  // Aqui o User_from sou EU
+        foreach($following as $follower) {
+          $userData = User::select()->where('id', $follower['user_to'])->one();  // E o User_to é uma outra pessoa que eu sigo
+
+          // preenchendo o objeto de usuário
+          $newUser = new User();
+          $newUser->id = $userData['id'];
+          $newUser->name = $userData['name'];
+          $newUser->avatar = $userData['avatar'];
+
+          // Adicionando o objeto de usuário no array de seguidores
+          $user->following[] = $newUser;
+        }
+
+
+
+        // photos
+
+      }
 
       return $user;
     }
