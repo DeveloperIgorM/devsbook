@@ -32,6 +32,11 @@ class ProfileController extends Controller {
         $this->redirect('/');
       }
 
+      // Calculo que faz a diferença entre a Data de Nascimento do usuário com a Data atual (hoje)
+      $dateFrom = new \DateTime($user->birthdate);
+      $dateTo = new \DateTime('today');
+      $user->ageYears = $dateFrom->diff($dateTo)->y;
+
       $this->render('profile', [
         'loggedUser' => $this->loggedUser,
         'user' => $user

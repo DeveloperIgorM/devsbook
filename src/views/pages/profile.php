@@ -45,7 +45,7 @@
 
             <div class="user-info-mini">
               <img src="<?= $base; ?>/assets/images/calendar.png" />
-              15/08/2001 (23 anos)
+              <?=date('d/m/Y' , strtotime($user->birthdate));?> (<?=$user->ageYears;?> anos)
             </div>
 
             <!--  SE city existir e estiver preenchido mostre, se não, não mostre -->
