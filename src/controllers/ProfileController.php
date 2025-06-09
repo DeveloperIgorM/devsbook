@@ -2,7 +2,7 @@
 namespace src\controllers;
 
 use \core\Controller;
-use \src\handlers\LoginHandler;
+use \src\handlers\UserHandler;
 use \src\handlers\PostHandler;
 
 class ProfileController extends Controller {
@@ -12,7 +12,7 @@ class ProfileController extends Controller {
 
     public function __construct() {
         // checando se o usuário está logado
-        $this->loggedUser = LoginHandler::checkLogin();
+        $this->loggedUser = UserHandler::checkLogin();
         if($this->loggedUser === false) {
             $this->redirect('/login');
         }
@@ -26,12 +26,15 @@ class ProfileController extends Controller {
         $id = $atts['id'];
       } 
       
+      $user = UserHandler::getUser($id);
 
-      echo "ID: ".$id;
-
+      if(!$user) {
+        $this->redirect('/');
+      }
 
       $this->render('profile', [
-        'loggedUser' => $this->loggedUser
+        'loggedUser' => $this->loggedUser,
+        'user' => $user
       ]);
 
     }
