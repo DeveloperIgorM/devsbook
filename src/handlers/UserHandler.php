@@ -50,10 +50,13 @@ class UserHandler {
     }
   }
 
+  // Função que verfica se já existe o ID no banco de dados
   public static function idExists($id) {
-    $user = User::select()->where('email', $id)->one();
+    $user = User::select()->where('id', $id)->one();
     return $user ? true : false;
   }
+
+  // Função que verfica se o Email enviado já existe 
   public static function emailExists($email) {
     $user = User::select()->where('email', $email)->one();
     return $user ? true : false;
@@ -124,7 +127,7 @@ class UserHandler {
     return false;
   }
 
-
+  // Adiciona o usuário ao banco de dados
   public static function addUser($name, $email, $password, $birthdate) {
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $token = md5(time() . rand(0, 9999) . time());
@@ -140,6 +143,7 @@ class UserHandler {
     return $token;
   }
 
+  // Função que verifica, se está seguindo ou não o usuário
   public static function isFollowing($from, $to) {
     $data = UsersRelation::select()
       ->where('user_from', $from)
@@ -152,4 +156,22 @@ class UserHandler {
       return false;
     }
   }
+
+  public static function follow($from, $to) {
+    // Criando um registro
+    UsersRelation::insert([
+      'user_from' => $from,
+      'user_to' => $to
+    ])->execute();
+  }
+
+  public static function unfollow($from, $to) {
+    // Deletando um registro
+    UsersRelation::delete()
+      ->where('user_from' ,$from)
+      ->where('user_to', $to)
+    ->execute();
+    
+  }
+
 }

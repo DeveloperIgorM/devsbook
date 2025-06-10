@@ -42,16 +42,15 @@ class ProfileController extends Controller {
 
     // Pegando o feed do usuário
     $feed = PostHandler::getUserFeed(
-      $id, 
-      $page, 
+      $id,
+      $page,
       $this->loggedUser->id
     );
 
     // Verificar se EU sigo o usuário
     $isFollowing = false;
-    if($user->id != $this->loggedUser->id) {
-      $isFollowing = userHandler::isFollowing($this->loggedUser->id, $user->id);
-
+    if ($user->id != $this->loggedUser->id) {
+      $isFollowing = UserHandler::isFollowing($this->loggedUser->id, $user->id);
     }
 
 
@@ -61,5 +60,23 @@ class ProfileController extends Controller {
       'feed' => $feed,
       'isFollowing' => $isFollowing
     ]);
+  }
+
+  public function follow($atts) {
+    $to = intval($atts['id']);
+
+
+    if (UserHandler::idExists($to)) {
+      if (UserHandler::isFollowing($this->loggedUser->id, $to)) {
+
+        //desseguir 
+        UserHandler::unfollow($this->loggedUser->id, $to);
+      } else {
+        //seguir
+        UserHandler::follow($this->loggedUser->id, $to);
+      }
+    }
+
+    $this->redirect('/perfil/'. $to);
   }
 }
