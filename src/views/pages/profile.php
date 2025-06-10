@@ -17,6 +17,17 @@
               <div class="profile-info-location"><?= $user->city; ?></div>
             </div>
             <div class="profile-info-data row">
+              <!--Caso o usuário logado esteja visitando o próprio perfil, não exibe o botão-->
+              <?php if ($user->id != $loggedUser->id): ?>
+                <div class="profile-info-item m-width-20">
+              <!--Caso isFollowing for True, quer dizer que o usuário logado já segue o usuário em que ele está acessando-->
+                  <?php if ($isFollowing): ?>
+                    <a href="" class="button">Deixar de seguir</a>
+                  <?php else: ?>
+                    <a href="" class="button">Seguir</a>
+                  <?php endif; ?>
+                </div>
+              <?php endif; ?>
               <div class="profile-info-item m-width-20">
                 <div class="profile-info-item-n"><?= count($user->followers); ?></div>
                 <div class="profile-info-item-s">Seguidores</div>

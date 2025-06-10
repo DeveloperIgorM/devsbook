@@ -22,12 +22,13 @@ class ProfileController extends Controller {
   public function index($atts = []) {
     $page = intval(filter_input(INPUT_GET, 'page'));
 
+    // Detectando o usuário logado, se é o meu usuário ou se é de outra pessoa
     $id = $this->loggedUser->id;
-
     if (!empty($atts['id'])) {
       $id = $atts['id'];
     }
 
+    // Pegando informações do usuário
     $user = UserHandler::getUser($id, true);
 
     if (!$user) {
@@ -39,16 +40,26 @@ class ProfileController extends Controller {
     $dateTo = new \DateTime('today');
     $user->ageYears = $dateFrom->diff($dateTo)->y;
 
+    // Pegando o feed do usuário
     $feed = PostHandler::getUserFeed(
       $id, 
       $page, 
       $this->loggedUser->id
     );
 
+    // Verificar se EU sigo o usuário
+    $isFollowing = false;
+    if($user->id != $this->loggedUser->id) {
+      $isFollowing = userHandler::isFollowing($this->loggedUser->id, $user->id);
+
+    }
+
+
     $this->render('profile', [
       'loggedUser' => $this->loggedUser,
       'user' => $user,
-      'feed' => $feed
+      'feed' => $feed,
+      'isFollowing' => $isFollowing
     ]);
   }
 }

@@ -73,7 +73,7 @@ class UserHandler {
       $user->avatar = $data['avatar'];
       $user->cover = $data['cover'];
 
-      if($full) {
+      if ($full) {
         $user->followers = [];
         $user->following = [];
         $user->photos = [];
@@ -83,7 +83,7 @@ class UserHandler {
 
         // FOLLOWERS -> Seguidores
         $followers = UsersRelation::select()->where('user_to', $id)->get();  //pegando as relações
-        foreach($followers as $follower) {
+        foreach ($followers as $follower) {
           $userData = User::select()->where('id', $follower['user_from'])->one();  // user_from -> quem é que seguiu o usuário que estou acessando 
 
 
@@ -99,8 +99,8 @@ class UserHandler {
 
 
         // FOLLOWING -> Seguindo
-         $following = UsersRelation::select()->where('user_from', $id)->get();  // Aqui o User_from sou EU
-        foreach($following as $follower) {
+        $following = UsersRelation::select()->where('user_from', $id)->get();  // Aqui o User_from sou EU
+        foreach ($following as $follower) {
           $userData = User::select()->where('id', $follower['user_to'])->one();  // E o User_to é uma outra pessoa que eu sigo
 
           // preenchendo o objeto de usuário
@@ -138,5 +138,18 @@ class UserHandler {
     ])->execute();
 
     return $token;
+  }
+
+  public static function isFollowing($from, $to) {
+    $data = UsersRelation::select()
+      ->where('user_from', $from)
+      ->where('user_to', $to)
+    ->one();
+
+    if ($data) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
