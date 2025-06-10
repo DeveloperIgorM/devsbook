@@ -3,6 +3,8 @@ use core\Router;
 
 $router = new Router();
 
+// Url -> '/lugar', 'nomeController@metodo'
+
 $router->get('/', 'HomeController@index');
 
 $router->get('/login', 'LoginController@signin');
@@ -16,6 +18,7 @@ $router->post('/post/new', 'PostController@new');
 $router->get('/perfil/{id}', 'ProfileController@index');
 $router->get('/perfil', 'ProfileController@index');
 
+$router->get('/sair', 'LoginController@logout');
 
 //$router->get('/pesquisar);
 //$router->get('/perfil);

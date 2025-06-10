@@ -99,4 +99,11 @@ class LoginController extends Controller {
       $this->redirect('/cadastro');
     }
   }
+
+  public function logout() {
+    // Esvaziando o token 
+    $_SESSION['token'] = '';
+    $this->redirect('/login');
+  }
+
 }
