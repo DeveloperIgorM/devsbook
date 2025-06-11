@@ -12,7 +12,6 @@
 
         <div class="box">
           <div class="box-body">
-
             <div class="user-info-mini">
               <img src="<?= $base; ?>/assets/images/calendar.png" />
               <?= date('d/m/Y', strtotime($user->birthdate)); ?> (<?= $user->ageYears; ?> anos)
@@ -33,8 +32,6 @@
                 B7Web
               </div>
             <?php endif; ?>
-
-
           </div>
         </div>
 
@@ -64,9 +61,9 @@
                 </div>
               <?php endif; ?>
             <?php endfor; ?>
-
           </div>
         </div>
+        
       </div>
 
 
