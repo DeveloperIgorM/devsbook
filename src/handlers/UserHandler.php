@@ -195,4 +195,8 @@ class UserHandler {
     return $users;
   }
 
+  public static function updateUser($atts, $id) {
+
+  }
+
 }
