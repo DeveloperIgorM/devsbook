@@ -4,7 +4,7 @@
 
   <section class="feed">
 
-    <?=$render('perfil-header',['user' => $user, 'loggedUser' => $loggedUser, 'isFollowing' => $isFollowing]) ;?>
+    <?= $render('perfil-header', ['user' => $user, 'loggedUser' => $loggedUser, 'isFollowing' => $isFollowing]); ?>
 
     <div class="row">
 
@@ -29,7 +29,7 @@
             <?php if (!empty($user->work)) : ?>
               <div class="user-info-mini">
                 <img src="<?= $base; ?>/assets/images/<?= $user->work; ?>" />
-                B7Web
+                <?= $user->work; ?>
               </div>
             <?php endif; ?>
           </div>
@@ -63,7 +63,7 @@
             <?php endfor; ?>
           </div>
         </div>
-        
+
       </div>
 
 

@@ -1,76 +1,83 @@
-<?= $render('header', ['loggedUser' => $loggedUser]); ?>
+<?=$render('header', ['loggedUser'=>$loggedUser]);?>
+
 <section class="container main">
-  <?= $render('sidebar', ['activeMenu' => 'config']); ?>
+    <?=$render('sidebar', ['activeMenu'=>'config']);?>
 
-  <section class="feed mt-10">
+    <section class="feed mt-10">
 
-    <div class="row">
-      <div class="column pr-5">
+        <h1>Configurações</h1>
 
-        <div class="page-title mt-10">
-          <h1>Configurações</h1>
-        </div>
+        <?php if(!empty($flash)): ?>
+            <div class="flash"><?php echo $flash; ?></div>
+        <?php endif; ?>
 
-        <form method="POST" action="<?= $base; ?>/config">
-          <div class="update-avatar mt-10">
-            <label for="avatar">Novo <span>Avatar:</span><br><br>
+        <form class="config-form" method="POST" enctype="multipart/form-data" action="<?=$base;?>/config">
+
+            <label>
+                Novo Avatar:<br/>
+                <input type="file" name="avatar" /><br/>
+                <img class="image-edit" src="<?=$base;?>/media/avatars/<?=$user->avatar; ?>" />
             </label>
-            <input type="file" name="avatar" id="avatar" accept="image/*">
-          </div>
-          <div class="update-cover mt-10">
-            <label for="capa">Nova <span>Capa:</span><br><br>
+
+            <label>
+                Nova Capa:<br/>
+                <input type="file" name="cover" /><br/>
+                <img class="image-edit" src="<?=$base;?>/media/covers/<?=$user->cover; ?>" />
             </label>
-            <input type="file" name="cover" id="cover" accept="image/*">
-          </div>
-          <br>
-          <hr>
 
-          <div class="container-edit">
-            <div class="title mt-10">
-              <label for="name">Nome Completo:</label><br>
-              <input class="input" type="text" name="name" />
-            </div>
+            <hr/>
 
-            <div class="title mt-10">
-              <label for="name">Data de Nascimento:</label><br>
-              <input class="input" type="date" name="birthdate" />
-            </div>
+            <label>
+                Nome Completo:<br/>
+                <input type="text" name="name" value="<?=$user->name;?>" />
+            </label>
 
-            <div class="title mt-10">
-              <label for="name">E-mail:</label><br>
-              <input class="input" type="email" name="email" />
-            </div>
+            <label>
+                Data de nascimento:<br/>
+                <input type="text" name="birthdate" value="<?=date('d/m/Y', strtotime($user->birthdate));?>" />
+            </label>
 
-            <div class="title mt-10">
-              <label for="name">Cidade:</label><br>
-              <input class="input" type="text" name="city" />
-            </div>
+            <label>
+                E-mail:<br/>
+                <input type="email" name="email" value="<?=$user->email;?>" />
+            </label>
 
-            <div class="title mt-10">
-              <label for="work">Trabalho:</label><br>
-              <input class="input" type="text" name="work" />
-            </div>
-            <br>
-            <hr>
+            <label>
+                Cidade:<br/>
+                <input type="text" name="city" value="<?=$user->city;?>" />
+            </label>
 
-            <div class="title mt-10">
-              <label for="password">Nova Senha:</label><br>
-              <input class="input" type="password" name="password" />
-            </div>
+            <label>
+                Trabalho:<br/>
+                <input type="text" name="work" value="<?=$user->work;?>" />
+            </label>
 
-            <div class="title mt-10">
-              <label for="password">Confirmar Nova Senha:</label><br>
-              <input class="input" type="password" name="password_confirm" />
-            </div>
+            <hr/>
 
-            <div class="title mt-10">
-              <input class="button" type="submit" value="salvar" />
-            </div>
-          </div>
+            <label>
+                Nova Senha:<br/>
+                <input type="password" name="password" />
+            </label>
+
+            <label>
+                Confirmar Nova Senha:<br/>
+                <input type="password" name="password_confirm" />
+            </label>
+
+            <button class="button">Salvar</button>
+
         </form>
-      </div>
-    </div>
 
-  </section>
+    </section>
+
 </section>
-<?= $render('footer'); ?>
+<script src="https://unpkg.com/imask"></script>
+<script>
+IMask(
+    document.getElementById('birthdate'),
+    {
+        mask:'00/00/0000'
+    }
+);
+</script>
+<?=$render('footer');?>
