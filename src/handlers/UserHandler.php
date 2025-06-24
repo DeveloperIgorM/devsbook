@@ -70,6 +70,7 @@ class UserHandler {
       $user = new User();
       $user->id = $data['id'];
       $user->name = $data['name'];
+      $user->email = $data['email'];
       $user->birthdate = $data['birthdate'];
       $user->city = $data['city'];
       $user->work = $data['work'];
