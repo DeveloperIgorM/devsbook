@@ -28,7 +28,7 @@
             <!--  SE work existir e estiver preenchido mostre, se não, não mostre -->
             <?php if (!empty($user->work)) : ?>
               <div class="user-info-mini">
-                <img src="<?= $base; ?>/assets/images/<?= $user->work; ?>" />
+                  <img src="<?=$base;?>/assets/images/work.png" />
                 <?= $user->work; ?>
               </div>
             <?php endif; ?>
