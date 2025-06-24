@@ -7,8 +7,8 @@
       <div class="feed-new-input-placeholder">O que você está pensando, <?= $user->name; ?>?</div>
       <div class="feed-new-input" contenteditable="true"></div>
       <div class="feed-new-photo">
-          <img src="<?=$base;?>/assets/images/photo.png" alt="">
-          <input type="file" name="photo" class="feed-new-file" accept="image/pnj, image/jpg, image/jpeg" />
+          <img src="<?=$base;?>/assets/images/photo.png"/>
+          <input type="file" name="photo" class="feed-new-file" accept="image/pnj,image/jpg,image/jpeg" />
       </div>
       <div class="feed-new-send">
         <img src="<?=$base;?>/assets/images/send.png" />
@@ -34,12 +34,13 @@
   });
 
   feedFile.addEventListener('change', async function() {
+    console.log("fotos", feedFile.files);
     let photo = feedFile.files[0];
 
     let formData = new FormData();
     formData.append('photo', photo);
     
-    let req = await fetch(BASE+'/ajax/updload', {
+    let req = await fetch(BASE+'/ajax/upload', {
       method:'POST',
       body: formData
     });
