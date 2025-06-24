@@ -32,6 +32,7 @@ $router->post('/config', 'ConfigController@save');
 $router->get('/sair', 'LoginController@logout');
 
 $router->get('/ajax/like/{id}', 'AjaxController@like');
+$router->post('/ajax/comment', 'AjaxController@comment');
 
 //$router->get('/pesquisar);
 //$router->get('/perfil);

@@ -56,7 +56,7 @@ class PostHandler {
 
       // TODO 4.2 preencher informações de COMMENTS
       $newPost->comments = PostComment::select()->where('id_post', $postItem['id'])->get();
-      foreach($newPost->comments as $key => $comment) {
+      foreach ($newPost->comments as $key => $comment) {
         $newPost->comments[$key]['user'] = User::select()->where('id', $comment['id_user'])->one();
       }
 
@@ -83,14 +83,23 @@ class PostHandler {
     PostLike::delete()
       ->where('id_post', $id)
       ->where('id_user', $loggedUserId)
-    ->execute();
+      ->execute();
   }
-  
+
   public static function addLike($id, $loggedUserId) {
     PostLike::insert([
       'id_post' => $id,
       'id_user' => $loggedUserId,
       'created_at' => date('Y-m-d H:i:s')
+    ])->execute();
+  }
+
+  public static function addComment($id, $txt, $loggedUserId) {
+    PostComment::insert([
+      'id_post' => $id,
+      'id_user' => $loggedUserId,
+      'created_at' => date('Y-m-d H:i:s'),
+      'body' => $txt
     ])->execute();
   }
 
