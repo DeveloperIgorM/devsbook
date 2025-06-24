@@ -133,7 +133,7 @@ class PostHandler {
 
 
   public static function getHomeFeed($idUser, $page) {
-    $perPage = 2;
+    $perPage = 5;
 
     // 1. pegar lista de usuários que EU sigo.
     $userList = UsersRelation::select()->where('user_from', $idUser)->get();  // pegando todos os registros que em 'user_from' sou eu
