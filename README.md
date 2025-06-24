@@ -1,33 +1,68 @@
-## Instalação
-Você pode clonar este repositório OU baixar o .zip
+# 📘 Devsbook
 
-Ao descompactar, é necessário rodar o **composer** pra instalar as dependências e gerar o *autoload*.
+Devsbook é uma rede social simples e funcional, desenvolvida com PHP puro, que permite aos usuários se conectarem, postarem atualizações, curtirem e comentarem publicações — uma versão minimalista do Facebook, feita para fins de aprendizado e demonstração de habilidades em desenvolvimento web.
 
-Vá até a pasta do projeto, pelo *prompt/terminal* e execute:
-> composer install
+## 🧠 Funcionalidades
 
-Depois é só aguardar.
+- Cadastro e login de usuários
+- Edição de perfil (incluindo foto/avatar)
+- Publicação de textos e imagens
+- Feed de notícias com ordenação por data
+- Sistema de curtidas e comentários
+- Página de perfil com linha do tempo pessoal
+- Sistema de seguidores (seguir/deixar de seguir)
+- Upload e redimensionamento automático de imagens
+- Busca por outros usuários
 
-## Configuração
-Todos os arquivos de **configuração** e aplicação estão dentro da pasta *src*.
 
-As configurações de Banco de Dados e URL estão no arquivo *src/Config.php*
+## 🛠️ Tecnologias e ferramentas utilizadas
 
-É importante configurar corretamente a constante *BASE_DIR*:
-> const BASE_DIR = '/**PastaDoProjeto**/public';
+- **PHP 7+**
+- **MySQL**
+- **HTML5, CSS3 e JavaScript**
+- **AJAX (fetch com async/await)**
+- **Arquitetura MVC (manual, sem frameworks)**
+- **Composer (para autoloading de classes)**
 
-## Uso
-Você deve acessar a pasta *public* do projeto.
+<br/>
 
-O ideal é criar um ***alias*** específico no servidor que direcione diretamente para a pasta *public*.
 
-## Modelo de MODEL
-```php
-<?php
-namespace src\models;
-use \core\Model;
+## 🚀 Como executar o projeto localmente
 
-class Usuario extends Model {
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/devsbook.git
+   cd devsbook
+   ```
+<br/>
 
-}
+
+## 📁 Estrutura do projeto
+   ```bash
+/public
+----/assets
+-------/css
+-------/images
+-------/js
+----/media
+/src
+---/controllers
+---/handlers
+---/models
+---/views
+-----/pages
+-----/partials
+/Config
+/routes
 ```
+<br/>
+
+## 👨🏾‍💻 Autor
+
+### Desenvolvido por Igor Matheus 👽
+
+## 📝 Licença
+
+Este projeto está licenciado sob a MIT License.
+Você pode usá-lo, modificá-lo e compartilhar livremente.
+
