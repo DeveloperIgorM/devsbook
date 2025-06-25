@@ -31,7 +31,7 @@ Devsbook é uma rede social simples e funcional, desenvolvida com PHP puro, que 
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/devsbook.git
+   git clone  https://github.com/DeveloperIgorM/devsbook.git
    cd devsbook
    ```
 <br/>
