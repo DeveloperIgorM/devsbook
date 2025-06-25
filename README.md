@@ -38,22 +38,31 @@ Devsbook é uma rede social simples e funcional, desenvolvida com PHP puro, que 
 
 
 ## 📁 Estrutura do projeto
-   ```bash
+
+```bash
 /public
-----/assets
--------/css
--------/images
--------/js
-----/media
+├── /assets
+│   ├── /css
+│   ├── /images
+│   └── /js
+├── /media
+├──.htaccess
+├──index.php
+
+
 /src
----/controllers
----/handlers
----/models
----/views
------/pages
------/partials
-/Config
-/routes
+├── /controllers
+├── /handlers
+├── /models
+├── /views
+│    ├── /pages
+│    └── /partials
+│
+├──Config
+├──routes
+
+/vendor
+
 ```
 <br/>
 
