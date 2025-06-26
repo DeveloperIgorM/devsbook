@@ -1,6 +1,6 @@
 <h1><img src="public/assets/images/logo.png" alt="Logo" width="30"/> Devsbook</h1>
 
-![Imagem do projeto](public/assets/images/home-devsbook.png)
+![Imagem do projeto](public/assets/images/home.png)
 
 
 Devsbook é uma rede social simples e funcional, desenvolvida com PHP puro, que permite aos usuários se conectarem, postarem atualizações, curtirem e comentarem publicações — uma versão minimalista do Facebook, feita para fins de aprendizado e demonstração de habilidades em desenvolvimento web.
